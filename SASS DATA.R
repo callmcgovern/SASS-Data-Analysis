@@ -1,8 +1,9 @@
-#install packages 
+#install packages
+#install.packages(c("dplyr", "tidyverse", "data.table", "writexl"))
 library(dplyr)
 library(tidyverse)
 library(data.table)
-library(ggplot2)
+library(writexl)
 
 #upload data as a csv below
 SASS_data <-fread("Spring 21 SI PASS Combined.csv")
@@ -71,6 +72,6 @@ SASS_data <-  mutate(SASS_data, NoVisits = ifelse(is.na(Visits), TRUE, FALSE))
 SASS_data <-  mutate(SASS_data, Regular = ifelse(!is.na(Visits) & (Visits >= 5), TRUE, FALSE))
 
 view(SASS_data)
-write.csv(SASS_data, "SASS_data.csv", row.names = FALSE)
+write_xlsx(SASS_data, "SASS_data.xlsx")
 
 
