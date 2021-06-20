@@ -115,7 +115,6 @@ Grades_Regs_Pro <- merge.data.frame(merge.data.frame(merge.data.frame(merge.data
     F_Regs_Pro, by = "Program", all = TRUE)
 
 Grades_Regs_Pro <-  merge.data.frame(Grades_Regs_Pro, W_Regs_Pro, by = "Program", all = TRUE)  
-
 Grades_Regs_Pro <- setnames(Grades_Regs_Pro, c("Program", "A", "A-", "B+", "B", "B-", "C+", "C", "D", "F", "W"))
 Grades_Regs_Pro <- cbind(Grades_Regs_Pro, total = rowSums(Grades_Regs_Pro[,2:11], na.rm = TRUE))
 #view(Grades_Regs_Pro)
@@ -203,34 +202,10 @@ DFWs_NoVisits_Pro <- mutate(DFWs_NoVisits_Pro, "DFW%" = round((DFWs_NoVisits_Pro
 #view(DFWs_NoVisits_Pro)
 
 "________________________________________________________________________________________________________________________________________"
-library(xlsx)
-
-wb = createWorkbook()
-sheet = createSheet(wb, "count")
-addDataFrame(Program_count, sheet=sheet, startColumn=1, row.names=FALSE)
-
-sheet = createSheet(wb, "meanGpa")
-addDataFrame(meanGpaProgram, sheet=sheet, startColumn=1, row.names=FALSE)
-
-sheet = createSheet(wb, "Grades_Regs_Pro")
-addDataFrame(Grades_Regs_Pro, sheet=sheet, startColumn=1, row.names=FALSE)
-
-sheet = createSheet(wb, "Grades_Under5_Pro")
-addDataFrame(Grades_Under5_Pro, sheet=sheet, startColumn=1, row.names=FALSE)
-
-sheet = createSheet(wb, "Grades_NoVisits_Pro")
-addDataFrame(Grades_NoVisits_Pro, sheet=sheet, startColumn=1, row.names=FALSE)
-
-sheet = createSheet(wb, "DFWs_Regs_Pro")
-addDataFrame(DFWs_Regs_Pro, sheet=sheet, startColumn=1, row.names=FALSE)
-
-sheet = createSheet(wb, "DFWs_Under5_Pro")
-addDataFrame(DFWs_Under5_Pro, sheet=sheet, startColumn=1, row.names=FALSE)
-
-sheet = createSheet(wb, "DFWs_NoVisits_Pro")
-addDataFrame(DFWs_NoVisits_Pro, sheet=sheet, startColumn=1, row.names=FALSE)
-
-saveWorkbook(wb, "Data by Program.xlsx")
+write_xlsx(list(Program_count = Program_count, meanGpaProgram= meanGpaProgram, Grades_Regs_Pro = Grades_Regs_Pro, 
+                Grades_Under5_Pro = Grades_Under5_Pro, Grades_NoVisits_Pro = Grades_NoVisits_Pro, DFWs_Regs_Pro = DFWs_Regs_Pro, 
+                DFWs_Under5_Pro = DFWs_Under5_Pro, DFWs_NoVisits_Pro = DFWs_NoVisits_Pro),
+           "Data by Program.xlsx")
 
 
 

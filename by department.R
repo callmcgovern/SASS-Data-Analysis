@@ -188,34 +188,11 @@ DFWs_NoVisits_Dep <- mutate(DFWs_NoVisits_Dep, "DFW%" = round((DFWs_NoVisits_Dep
 #view(DFWs_NoVisits_Dep)
 
 "________________________________________________________________________________________________________________________________________"
-library(xlsx)
 
-wb = createWorkbook()
-sheet = createSheet(wb, "Dep_count")
-addDataFrame(Program_count, sheet=sheet, startColumn=1, row.names=FALSE)
-
-sheet = createSheet(wb, "meanGpaDep")
-addDataFrame(meanGpaProgram, sheet=sheet, startColumn=1, row.names=FALSE)
-
-sheet = createSheet(wb, "Grades_Regs_Dep")
-addDataFrame(Grades_Regs_Dep, sheet=sheet, startColumn=1, row.names=FALSE)
-
-sheet = createSheet(wb, "Grades_Under5_Dep")
-addDataFrame(Grades_Under5_Dep, sheet=sheet, startColumn=1, row.names=FALSE)
-
-sheet = createSheet(wb, "Grades_NoVisits_Dep")
-addDataFrame(Grades_NoVisits_Dep, sheet=sheet, startColumn=1, row.names=FALSE)
-
-sheet = createSheet(wb, "DFWs_Regs_Dep")
-addDataFrame(DFWs_Regs_Dep, sheet=sheet, startColumn=1, row.names=FALSE)
-
-sheet = createSheet(wb, "DFWs_Under5_Dep")
-addDataFrame(DFWs_Under5_Dep, sheet=sheet, startColumn=1, row.names=FALSE)
-
-sheet = createSheet(wb, "DFWs_NoVisits_Dep")
-addDataFrame(DFWs_NoVisits_Dep, sheet=sheet, startColumn=1, row.names=FALSE)
-
-saveWorkbook(wb, "Data by Department.xlsx")
+write_xlsx(list(Dep_count = Dep_count, meanGpaDep = meanGpaDep, Grades_Regs_Dep = Grades_Regs_Dep, 
+                Grades_Under5_Dep = Grades_Under5_Dep, Grades_NoVisits_Dep = Grades_NoVisits_Dep, DFWs_Regs_Dep = DFWs_Regs_Dep, 
+                DFWs_Under5_Dep = DFWs_Under5_Dep, DFWs_NoVisits_Dep = DFWs_NoVisits_Dep),
+            "Data by Department.xlsx")
 
 
 

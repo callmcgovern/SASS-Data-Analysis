@@ -58,46 +58,109 @@ All_count <- setnames(All_count, c(
 "________________________________________________________________________________________________________________________________________"
 #GRADES ALL
 
-As_All <- SASS_data %>% filter(GPA== "4") %>% tally()
-Am_All <- SASS_data %>% filter(GPA== "3.7") %>% tally()
-Bp_All <- SASS_data %>% filter(GPA== "3.3") %>% tally()
-B_All <- SASS_data %>% filter(GPA== "3.0" | GPA== "3") %>% tally()
-Bm_All <- SASS_data %>% filter(GPA== "2.7") %>% tally()
-Cp_All <- SASS_data %>% filter(GPA== "2.3") %>% tally()
-C_All <- SASS_data %>% filter(GPA== "2.0" | GPA== "2") %>% tally()
-D_All <- SASS_data %>% filter(GPA== "1.0" | GPA== "1") %>% tally()
-F_All <- SASS_data %>% filter(GPA== "0.0" | GPA== "0") %>% tally()
-W_All <- SASS_data %>% filter(Final_Grade == "W") %>% tally()
+As_Regs_All <- regularSubsetAll %>% group_by(GPA) %>%filter(GPA== "4") %>% tally()
+Am_Regs_All <- regularSubsetAll %>% group_by(GPA) %>%filter(GPA== "3.7") %>% tally()
+Bp_Regs_All <- regularSubsetAll %>% group_by(GPA) %>%filter(GPA== "3.3") %>% tally()
+B_Regs_All <- regularSubsetAll %>% group_by(GPA) %>% filter(GPA== "3.0" | GPA== "3") %>% tally()
+Bm_Regs_All <- regularSubsetAll %>% group_by(GPA) %>%filter(GPA== "2.7") %>% tally()
+Cp_Regs_All <- regularSubsetAll %>% group_by(GPA) %>%filter(GPA== "2.3") %>% tally()
+C_Regs_All <- regularSubsetAll %>% group_by(GPA) %>% filter(GPA== "2.0" | GPA== "2") %>% tally()
+D_Regs_All <- regularSubsetAll %>% group_by(GPA) %>% filter(GPA== "1.0" | GPA== "1") %>% tally()
+F_Regs_All <- regularSubsetAll %>% group_by(GPA) %>% filter(GPA== "0.0" | GPA== "0") %>% tally()
+regularSubsetAll1 <- subset(SASS_data, Regular == TRUE)
+W_Regs_All <- regularSubsetAll1 %>% filter(Final_Grade == "W") %>% tally()
 
-Grades_All <- rename(Grades_All, 
-                     total = "y")
+Grades_Regs_All <- data.frame(
+  "A" = As_Regs_All[1,2], 
+  "A-" = Am_Regs_All[1,2],
+  "B+" = Bp_Regs_All[1,2],
+  "B" = B_Regs_All[1,2],
+  "B-" = Bm_Regs_All[1,2],
+  "C+" = Cp_Regs_All[1,2],
+  "C" = C_Regs_All[1,2],
+  "D" = D_Regs_All[1,2],
+  "F" = F_Regs_All[1,2], 
+  "W" = W_Regs_All)
+Grades_Regs_All <- set_names(Grades_Regs_All, c("A", "A-", "B+", "B", "B-", "C+", "C", "D", "F", "W"))
 
-#DFW % All
-DFWs_All <- subset(Grades_All, select = c("total", "D", "F", "W"))
-DFWs_All <- mutate(DFWs_All, DFW = rowSums(DFWs_All[, 2:4], na.rm = TRUE))
-DFWs_All <- mutate(DFWs_All, "DFW%" = round((DFWs_All$DFW/DFWs_All$total)*100))
-DFWs_All <- subset(DFWs_All, select = -c(1))
 
-#binding grades and DFWs
-all <- cbind(Grades_All, DFWs_All)
-all <- subset(all, select = -c(12,13,14))
-All_Grades <- all[ , c(1,2,3,4,5,6,7,8,9,10,12,13,11)]
-#view(All_Grades)
+
+As_Under5_All <- underFiveSubsetAll %>% group_by(GPA) %>% filter(GPA== "4") %>% tally()
+Am_Under5_All <- underFiveSubsetAll %>% group_by(GPA) %>% filter(GPA== "3.7") %>% tally()
+Bp_Under5_All <- underFiveSubsetAll %>% group_by(GPA) %>% filter(GPA== "3.3") %>% tally()
+B_Under5_All <- underFiveSubsetAll %>% group_by(GPA) %>% filter(GPA== "3.0" | GPA== "3") %>% tally()
+Bm_Under5_All <- underFiveSubsetAll %>% group_by(GPA) %>% filter(GPA== "2.7") %>% tally()
+Cp_Under5_All <- underFiveSubsetAll %>% group_by(GPA) %>% filter(GPA== "2.3") %>% tally()
+C_Under5_All <- underFiveSubsetAll %>% group_by(GPA) %>% filter(GPA== "2.0" | GPA== "2") %>% tally()
+D_Under5_All <- underFiveSubsetAll %>% group_by(GPA) %>% filter(GPA== "1.0" | GPA== "1") %>% tally()
+F_Under5_All <- underFiveSubsetAll %>% group_by(GPA) %>% filter(GPA== "0.0" | GPA== "0") %>% tally()
+underFiveSubsetAll1 <- subset(SASS_data, Regular == TRUE)
+W_Under5_All <- underFiveSubsetAll1 %>% filter(Final_Grade == "W") %>% tally()
+
+Grades_Under5_All <- data.frame(
+  "A" = As_Under5_All[1,2], 
+  "A-" = Am_Under5_All[1,2],
+  "B+" = Bp_Under5_All[1,2],
+  "B" = B_Under5_All[1,2],
+  "B-" = Bm_Under5_All[1,2],
+  "C+" = Cp_Under5_All[1,2],
+  "C" = C_Under5_All[1,2],
+  "D" = D_Under5_All[1,2],
+  "F" = F_Under5_All[1,2], 
+  "W" = W_Under5_All)
+Grades_Under5_All <- setnames(Grades_Under5_All, c("A", "A-", "B+", "B", "B-", "C+", "C", "D", "F", "W"))
+
+
+As_NoVisits_All <- noVisitSubsetAll %>% group_by(GPA)  %>% filter(GPA== "4") %>% tally()
+Am_NoVisits_All <- noVisitSubsetAll %>% group_by(GPA)  %>% filter(GPA== "3.7") %>% tally()
+Bp_NoVisits_All <- noVisitSubsetAll %>% group_by(GPA)  %>% filter(GPA== "3.3") %>% tally()
+B_NoVisits_All <- noVisitSubsetAll %>% group_by(GPA)   %>%  filter(GPA== "3.0" | GPA== "3") %>% tally()
+Bm_NoVisits_All <- noVisitSubsetAll %>% group_by(GPA)  %>% filter(GPA== "2.7") %>% tally()
+Cp_NoVisits_All <- noVisitSubsetAll %>% group_by(GPA)  %>% filter(GPA== "2.3") %>% tally()
+C_NoVisits_All <- noVisitSubsetAll %>% group_by(GPA)   %>%  filter(GPA== "2.0" | GPA== "2") %>% tally()
+D_NoVisits_All <- noVisitSubsetAll %>% group_by(GPA)   %>%  filter(GPA== "1.0" | GPA== "1") %>% tally()
+F_NoVisits_All <- noVisitSubsetAll %>% group_by(GPA)   %>%  filter(GPA== "0.0" | GPA== "0") %>% tally()
+noVisitSubsetAll1 <- subset(SASS_data, Regular == TRUE)
+W_NoVisits_All <- noVisitSubsetAll1 %>% filter(Final_Grade == "W") %>% tally()
+
+Grades_NoVisits_All <- data.frame(
+  "A" = As_NoVisits_All[1,2], 
+  "A-" = Am_NoVisits_All[1,2],
+  "B+" = Bp_NoVisits_All[1,2],
+  "B" = B_NoVisits_All[1,2],
+  "B-" = Bm_NoVisits_All[1,2],
+  "C+" = Cp_NoVisits_All[1,2],
+  "C" = C_NoVisits_All[1,2],
+  "D" = D_NoVisits_All[1,2],
+  "F" = F_NoVisits_All[1,2], 
+  "W" = W_NoVisits_All)
+Grades_NoVisits_All <- set_names(Grades_NoVisits_All, c("A", "A-", "B+", "B", "B-", "C+", "C", "D", "F", "W"))
+
+
+#DFW 
+DFWs_Regs_All <- mutate(Grades_Regs_All, total = sum(Grades_Regs_All))
+DFWs_Regs_All <- subset(DFWs_Regs_All, select = -c(1:7))
+DFWs_Regs_All <- mutate(DFWs_Regs_All, DFW = rowSums(DFWs_Regs_All[1, 1:3], na.rm = TRUE))
+DFWs_Regs_All <- mutate(DFWs_Regs_All, "DFW%" = round((DFWs_Regs_All$DFW/DFWs_Regs_All$total)*100))
+view(DFWs_Regs_All)
+
+DFWs_Under5_All <- mutate(Grades_Under5_All, total = sum(Grades_Under5_All))
+DFWs_Under5_All <- subset(DFWs_Under5_All, select = -c(1:7))
+DFWs_Under5_All <- mutate(DFWs_Under5_All, DFW = rowSums(DFWs_Under5_All[1, 1:3], na.rm = TRUE))
+DFWs_Under5_All <- mutate(DFWs_Under5_All, "DFW%" = round((DFWs_Under5_All$DFW/DFWs_Under5_All$total)*100))
+view(DFWs_Under5_All)
+
+DFWs_NoVisits_All <- mutate(Grades_NoVisits_All, total = sum(Grades_NoVisits_All))
+DFWs_NoVisits_All <- subset(DFWs_NoVisits_All, select = -c(1:7))
+DFWs_NoVisits_All <- mutate(DFWs_NoVisits_All, DFW = rowSums(DFWs_NoVisits_All[1, 1:3], na.rm = TRUE))
+DFWs_NoVisits_All <- mutate(DFWs_NoVisits_All, "DFW%" = round((DFWs_NoVisits_All$DFW/DFWs_NoVisits_All$total)*100))
+view(DFWs_NoVisits_All)
 
 "________________________________________________________________________________________________________________________________________"
-library(xlsx)
 
-wb = createWorkbook()
-sheet = createSheet(wb, "All_count")
-addDataFrame(All_count, sheet=sheet, startColumn=1, row.names=FALSE)
-
-sheet = createSheet(wb, "meanGpaAll")
-addDataFrame(meanGpaAll, sheet=sheet, startColumn=1, row.names=FALSE)
-
-sheet = createSheet(wb, "All_Grades")
-addDataFrame(All_Grades, sheet=sheet, startColumn=1, row.names=FALSE)
-
-saveWorkbook(wb, "Data by All students.xlsx")
+write_xlsx(list(All_count = All_count, meanGpaAll = meanGpaAll, Grades_Regs_All = Grades_Regs_All, Grades_Under5_All = Grades_Under5_All, 
+                Grades_NoVisits_All = Grades_NoVisits_All, DFWs_Regs_All = DFWs_Regs_All, DFWs_Under5_All = DFWs_Under5_All, 
+                DFWs_NoVisits_All = DFWs_NoVisits_All), "Data by All students.xlsx")
 
 
 

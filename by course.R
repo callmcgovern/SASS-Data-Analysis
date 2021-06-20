@@ -184,33 +184,11 @@ DFWs_NoVisits <- mutate(DFWs_NoVisits, DFW = rowSums(DFWs_NoVisits[, 2:4], na.rm
 DFWs_NoVisits <- mutate(DFWs_NoVisits, "DFW%" = round((DFWs_NoVisits$DFW/DFWs_NoVisits$total)*100))
 
 "________________________________________________________________________________________________________________________________________"
-library(xlsx)
 
 
-wb = createWorkbook()
-sheet = createSheet(wb, "count")
-addDataFrame(course_count, sheet=sheet, startColumn=1, row.names=FALSE)
+write_xlsx(list(course_count = course_count, meanGpaCourse = meanGpaCourse, Grades_Regs = Grades_Regs, Grades_Under5 = Grades_Under5, 
+                Grades_NoVisits = Grades_NoVisits, DFWs_Regs =DFWs_Regs, DFWs_Under5 = DFWs_Under5, DFWs_NoVisits = DFWs_NoVisits),
+           "Data by Course.xlsx")
 
-sheet = createSheet(wb, "meanGpa")
-addDataFrame(meanGpaCourse, sheet=sheet, startColumn=1, row.names=FALSE)
 
-sheet = createSheet(wb, "Grades_regulars")
-addDataFrame(Grades_Regs, sheet=sheet, startColumn=1, row.names=FALSE)
-
-sheet = createSheet(wb, "Grades_Under5")
-addDataFrame(Grades_Under5, sheet=sheet, startColumn=1, row.names=FALSE)
-
-sheet = createSheet(wb, "Grades_NoVisits")
-addDataFrame(Grades_NoVisits, sheet=sheet, startColumn=1, row.names=FALSE)
-
-sheet = createSheet(wb, "DFWs_Regs")
-addDataFrame(DFWs_Regs, sheet=sheet, startColumn=1, row.names=FALSE)
-
-sheet = createSheet(wb, "DFWs_Under5")
-addDataFrame(DFWs_Under5, sheet=sheet, startColumn=1, row.names=FALSE)
-
-sheet = createSheet(wb, "DFWs_NoVisits")
-addDataFrame(DFWs_NoVisits, sheet=sheet, startColumn=1, row.names=FALSE)
-
-saveWorkbook(wb, "Data by Course.xlsx")
 
