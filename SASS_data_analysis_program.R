@@ -1,6 +1,6 @@
 #install packages
-install.packages(c("dplyr", "tidyverse", "data.table", "writexl"))
-library(dplyr)
+install.packages(c("tidyverse", "data.table", "writexl"))
+
 library(tidyverse)
 library(data.table)
 library(writexl)
