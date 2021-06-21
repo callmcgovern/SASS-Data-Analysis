@@ -73,7 +73,7 @@ SASS_data <- SASS_data %>%
 SASS_data <-  mutate(SASS_data, NoVisits = ifelse(is.na(Visits), TRUE, FALSE))
 SASS_data <-  mutate(SASS_data, Regular = ifelse(!is.na(Visits) & (Visits >= 5), TRUE, FALSE))
 
-view(SASS_data)
+#view(SASS_data)
 write_xlsx(SASS_data, "SASS_data.xlsx")
 
 
@@ -317,11 +317,11 @@ meanGpaDep[is.num] <- lapply(meanGpaDep[is.num], round, 1)
 "________________________________________________________________________________________________________________________________________"
 #Counts by department
 #count of regulars in each course
-reg_count <- regularSubset %>% group_by(Department) %>% tally()
+reg_count <- regularSubsetDepartment %>% group_by(Department) %>% tally()
 #count of 1-4x in each course
-under5_count <- underFiveSubset %>% group_by(Department) %>% tally()
+under5_count <- underFiveSubsetDepartment %>% group_by(Department) %>% tally()
 #count of no visits in each course
-noVisits_count <- noVisitSubset %>% group_by(Department) %>% tally()
+noVisits_count <- noVisitSubsetDepartment %>% group_by(Department) %>% tally()
 #total
 total <- SASS_data %>% group_by(Department) %>% tally()
 
@@ -996,7 +996,7 @@ DFWs_NoVisits <- mutate(DFWs_NoVisits, "DFW%" = round((DFWs_NoVisits$DFW/DFWs_No
 #saves excel of by course data analysis to folder called "results"
 write_xlsx(list(course_count = course_count, meanGpaCourse = meanGpaCourse, Grades_Regs = Grades_Regs, Grades_Under5 = Grades_Under5, 
                 Grades_NoVisits = Grades_NoVisits, DFWs_Regs =DFWs_Regs, DFWs_Under5 = DFWs_Under5, DFWs_NoVisits = DFWs_NoVisits),
-           "Data by Course.xlsx")
+           "./Results/Data by Course.xlsx")
 
 
 
