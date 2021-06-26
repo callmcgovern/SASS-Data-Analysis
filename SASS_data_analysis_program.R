@@ -1,6 +1,5 @@
 #install packages
 install.packages(c("tidyverse", "data.table", "writexl"))
-
 library(tidyverse)
 library(data.table)
 library(writexl)
@@ -53,11 +52,11 @@ SASS_data <-
 SASS_data <- SASS_data %>%
   mutate(Department = replace(Department, Department == "ACG"| Department == "FIN", "Accounting"))
 SASS_data <- SASS_data %>%
-  mutate(Department = replace(Department, Department == "BSC"| Department == "MCB"| Department == "PCB", "Biology"))
+  mutate(Department = replace(Department, Department == "BSC"| Department == "MCB"| Department == "PCB" | Department == "ESC", "Biology"))
 SASS_data <- SASS_data %>%
   mutate(Department = replace(Department, Department == "CHM"| Department == "BCH", "Chemistry"))
 SASS_data <- SASS_data %>%
-  mutate(Department = replace(Department, Department == "EGN"| Department == "EMA"| Department == "EML", "Engineering"))
+  mutate(Department = replace(Department, Department == "EGN"| Department == "EMA"| Department == "EML" | Department == "EMA", "Engineering"))
 SASS_data <- SASS_data %>%
   mutate(Department = replace(Department, Department == "MAN", "Management"))
 SASS_data <- SASS_data %>%
@@ -475,7 +474,7 @@ SASS_data_programs <- SASS_data_programs %>%
   mutate(Program = replace(Program, Program == "BSC"| Program == "MCB"| Program == "PCB"|
                              Program == "CHM"| Program == "PHY"| Program == "PHI" | Program == "EGN"| 
                              Program == "EMA"| Program == "EML"| Program == "MAN" | Program == "ACG"| 
-                             Program == "FIN"| Program == "BCH",
+                             Program == "FIN"| Program == "BCH"| Program == "ESC" | Program == "EMA",
                            "SI"))
 #view(SASS_data_programs)
 "________________________________________________________________________________________________________________________________________"
