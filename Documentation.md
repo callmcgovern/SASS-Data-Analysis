@@ -1,7 +1,6 @@
 # SASS-Data-Analysis
 SASS Data Analysis with R: Documentation and Troubleshooting
 
- 
 Part 1: The set up
 
 A)   Arrange data in the “SI and PASS data.csv” file as shown below.
@@ -23,13 +22,14 @@ B)   Download RStudio onto your computer.
  
 C)  From the SASS-Data-Analysis GitHub, click on the Green “Code” button, and select “Download Zip” from the dropdown menu. If the zip file goes to your Downloads folder, move it to your desktop and decompress the file.
  
-D)   Move the csv from step A into the SASS-Data-Analysis folder on your desktop.
+D)   Move the csv from step A into that SASS-Data-Analysis folder on your desktop.
 
 
 
 
  
-Part 2: Running the script
+
+Part 2: Running the program
 
 The “SASS data analysis program.R” will organize the data and analyze it based on 5 categorizations: courses, department, program(SI/PASS), professor, and all. The program will then produce 5 excel documents (one for each category). Each excel document will consist of of several tabs which include: 
  	o  The number of students in each category (regular, 1-4 visits, never visited, total)
@@ -45,8 +45,8 @@ Delete the text between the quotation marks on line 10 and type in the name of t
 Hit “source” on the top right-hand side of R studio.
 RStudio will now install several packages. This may take a couple of minutes.
 - If the program prompts you by saying “do you want to download this package, yes/no/cancel?” type “yes” into the command line and hit enter. 
-- If the program asks you if it can shut down and re-open R inorder to download the packages, hit yes. Then you may need to hit “source” again. 
-If the program runs successfully, you will see a new folder called “Results” in the “SASS-Data-Analysis” folder on your desktop. This folder will include all 5 excel documents with the data analysis complete. 
+- If the program asks you if it can shut down and reopen R inorder to download the packages, hit yes. Then you may need to hit “source” again. 
+If the program runs successfully, you will see a new folder called “Results” in the “SASS-Data-Analysis” folder on your desktop. This folder will include all 5 excel documents. 
 
 
 
@@ -82,6 +82,8 @@ Code on line 470 revised with DOG course added into PASS program:
  mutate(Program = replace(Program, Program == "MAC"| Program == "COP"| Program == "STA" | Program == “DOG” , "PASS"))
 
 Note: If you don't know which courses are on the csv you are adding, Type “view(Courses)” into the console and hit enter to get a list of courses that are included in your data for this semester. 
+
+
 
 
 
