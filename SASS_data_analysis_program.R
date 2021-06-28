@@ -67,15 +67,14 @@ SASS_data <- SASS_data %>%
   mutate(Department = replace(Department, Department == "PHY", "Physics"))
 SASS_data <- SASS_data %>%
   mutate(Department = replace(Department, Department == "PHI", "Philosophy"))
+SASS_data <- SASS_data %>%
+  mutate(Department = replace(Department, Department == "ECO", "Economics"))
 
 #add and fill No visits and regular columns (the students who visited 1-4 times are the ones remaining)
 SASS_data <-  mutate(SASS_data, NoVisits = ifelse(is.na(Visits), TRUE, FALSE))
 SASS_data <-  mutate(SASS_data, Regular = ifelse(!is.na(Visits) & (Visits >= 5), TRUE, FALSE))
-
 #view(SASS_data)
 write_xlsx(SASS_data, "SASS_data.xlsx")
-
-
 "________________________________________________________________________________________________________________________________________"
 "________________________________________________________________________________________________________________________________________"
 #Data analysis by instructor (lines 81-274)
@@ -474,7 +473,7 @@ SASS_data_programs <- SASS_data_programs %>%
   mutate(Program = replace(Program, Program == "BSC"| Program == "MCB"| Program == "PCB"|
                              Program == "CHM"| Program == "PHY"| Program == "PHI" | Program == "EGN"| 
                              Program == "EMA"| Program == "EML"| Program == "MAN" | Program == "ACG"| 
-                             Program == "FIN"| Program == "BCH"| Program == "ESC" | Program == "EMA",
+                             Program == "FIN"| Program == "BCH"| Program == "ESC" | Program == "EMA"| Program == "ECO",
                            "SI"))
 #view(SASS_data_programs)
 "________________________________________________________________________________________________________________________________________"
