@@ -473,7 +473,7 @@ SASS_data_programs <- SASS_data_programs %>%
   mutate(Program = replace(Program, Program == "BSC"| Program == "MCB"| Program == "PCB"|
                              Program == "CHM"| Program == "PHY"| Program == "PHI" | Program == "EGN"| 
                              Program == "EMA"| Program == "EML"| Program == "MAN" | Program == "ACG"| 
-                             Program == "FIN"| Program == "BCH"| Program == "ESC" | Program == "EMA"| Program == "ECO",
+                             Program == "FIN"| Program == "BCH"| Program == "ESC" | Program == "ECO",
                            "SI"))
 #view(SASS_data_programs)
 "________________________________________________________________________________________________________________________________________"
@@ -743,7 +743,7 @@ Cp_Under5_All <- underFiveSubsetAll %>% group_by(GPA) %>% filter(GPA== "2.3") %>
 C_Under5_All <- underFiveSubsetAll %>% group_by(GPA) %>% filter(GPA== "2.0" | GPA== "2") %>% tally()
 D_Under5_All <- underFiveSubsetAll %>% group_by(GPA) %>% filter(GPA== "1.0" | GPA== "1") %>% tally()
 F_Under5_All <- underFiveSubsetAll %>% group_by(GPA) %>% filter(GPA== "0.0" | GPA== "0") %>% tally()
-underFiveSubsetAll1 <- subset(SASS_data, Regular == TRUE)
+underFiveSubsetAll1 <- subset(SASS_data, Visits > 0 & Visits < 5)
 W_Under5_All <- underFiveSubsetAll1 %>% filter(Final_Grade == "W") %>% tally()
 
 Grades_Under5_All <- data.frame(
@@ -768,7 +768,7 @@ Cp_NoVisits_All <- noVisitSubsetAll %>% group_by(GPA)  %>% filter(GPA== "2.3") %
 C_NoVisits_All <- noVisitSubsetAll %>% group_by(GPA)   %>%  filter(GPA== "2.0" | GPA== "2") %>% tally()
 D_NoVisits_All <- noVisitSubsetAll %>% group_by(GPA)   %>%  filter(GPA== "1.0" | GPA== "1") %>% tally()
 F_NoVisits_All <- noVisitSubsetAll %>% group_by(GPA)   %>%  filter(GPA== "0.0" | GPA== "0") %>% tally()
-noVisitSubsetAll1 <- subset(SASS_data, Regular == TRUE)
+noVisitSubsetAll1 <- subset(SASS_data, NoVisits == TRUE)
 W_NoVisits_All <- noVisitSubsetAll1 %>% filter(Final_Grade == "W") %>% tally()
 
 Grades_NoVisits_All <- data.frame(
